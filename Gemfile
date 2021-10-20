@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'simple_form'
 gem 'faker'
+gem 'devise'
+
 
 
 
