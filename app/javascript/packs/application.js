@@ -22,3 +22,7 @@ import "@fortawesome/fontawesome-free/css/all"
 
 require("trix")
 require("@rails/actiontext")
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require_tree .

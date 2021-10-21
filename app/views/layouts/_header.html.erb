@@ -1,42 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <i class="fas fa-flag"></i>
-      Brand
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <%= link_to root_path, class: "nav-link #{'active fw-bold' if current_page?(root_path)}" do %>
-          <div class="fa fa-home"></div>
-          Home
-        <% end %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex align-items-end">
+  <a class="navbar-brand" href="#">Rubygems</a>
+  <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <% if current_user %>
+      <ul class="navbar-nav mr-auto">
+        <li class="<%= 'active font-weight-bold' if current_page?(root_path) %> nav-item">
+          <%= link_to root_path, class: 'nav-link' do %>
+            <div class="fa fa-home"></div>
+            Home
+          <% end %>
+        </li>
+        <li class="<%= 'active font-weight-bold' if current_page?(courses_path) %> nav-item">
+          <%= link_to courses_path, class: 'nav-link' do %>
+            <div class="fa fa-book"></div>
+            Courses
+          <% end %>
+        </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
-        <% if current_user %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="fa fa-user"></div>
-              <b><%= current_user.email %></b>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to edit_user_registration_path, class: "dropdown-item #{'active fw-bold' if current_page?(edit_user_registration_path)}" do %>
-                <div class="fa fa-cog"></div>
-                <b>Account settings</b>
-              <% end %>
-              <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-                <div class="fa fa-sign-out-alt"></div>
-                <b>Sign out</b>
-              <% end %>
-            </ul>
-          </li>
-        <% else %>
-          <%= link_to "Log in", new_user_session_path, class: "nav-link #{'active fw-bold' if current_page?(new_user_session_path)}" %>
-          <%= link_to "Sign up", new_user_registration_path, class: "nav-link #{'active fw-bold' if current_page?(new_user_registration_path)}" %>
+      <div class="form-inline my-2 my-lg-0">
+        <%= form_tag(root_path, method: :get) do %>
+          <div class="input-group">
+            <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm' %>
+            <span class="input-group-append">
+              <button class="btn btn-primary btn-sm" type="submit">
+                <span aria-hidden="true" class="fa fa-search"></span>
+              </button>
+            </span>
+          </div>
         <% end %>
+      </div>
+      <ul class="navbar-nav mr-right">
+        <li class="<%= 'active font-weight-bold' if current_page?(root_path) %> nav-item">
+          <%= link_to root_path, class: 'nav-link' do %>
+            <div class="fa fa-home"></div>
+            Another link
+          <% end %>
+        </li>
+
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+            <b>
+              <%= current_user.email %>
+            </b>
+          </a>
+          <div aria-labelledby="navbarDropdown" class="d-flex">
+            <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+              <div class="fa fa-cog"></div>
+              <b>Account settings</b>
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+              <div class="fa fa-sign-out-alt"></div>
+              <b>Sign out</b>
+            <% end %>
+          </div>
+
       </ul>
-    </div>
+    <% else %>
+      <ul class="navbar-nav p-6">
+        <li class="nav-item">
+          <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Log In', new_user_session_path, class: 'nav-link' %>
+        </li>
+      </ul>
+    <% end %>
   </div>
 </nav>
