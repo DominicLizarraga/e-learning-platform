@@ -3,11 +3,14 @@
 <h1>Courses <%= Course.count %> </h1>
 
 
-<div class="card-columns">
-  <% @courses.each do |course| %>
-    <%= render 'courses/course', course: course %>
-  <% end %>
-</div>
+  <div class="card">
+    <div class="">
+      <% @courses.each do |course| %>
+        <%= render 'courses/course', course: course %>
+      <% end %>
+    </div>
+  </div>
+
 <br/>
 
 <br>

@@ -8,6 +8,14 @@
     <%= f.rich_text_area :description %>
   </div>
 
+  <small>
+    <%= f.error :description, class: 'text-danger' %>
+    <%= f.input :short_description %>
+    <%= f.input :language, collection: [ "English", "Polish", "Russian"] %>
+    <%= f.input :level, collection: [ "Beginner", "Intermediate", "Advanced"] %>
+    <%= f.input :price %>
+  </small>
+
   <div class="form-actions">
     <%= f.button :submit, class: 'btn btn-sm btn-success text-white mt-2' %>
   </div>
