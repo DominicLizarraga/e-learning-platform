@@ -1,22 +1,26 @@
-
-<%= simple_form_for(@course) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.rich_text_area :description %>
-  </div>
-
-  <small>
-    <%= f.error :description, class: 'text-danger' %>
-    <%= f.input :short_description %>
-    <%= f.input :language, collection: [ "English", "Polish", "Russian"] %>
-    <%= f.input :level, collection: [ "Beginner", "Intermediate", "Advanced"] %>
-    <%= f.input :price %>
-  </small>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-sm btn-success text-white mt-2' %>
-  </div>
-<% end %>
+<div class="container">
+  <% # frozen_string_literal: true %>
+  <%= simple_form_for(@course) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-inputs">
+      <%= f.input :title %>
+      <%= f.label :description %>
+      <%= f.rich_text_area :description %>
+      <small>
+        <%= f.error :description, class: 'text-danger' %>
+      </small>
+      <%= f.input :short_description %>
+      <!--= f.input :language, collection: [ "English", "Polish", "Russian"]
+      -->
+      <%= f.input :language, collection: Course.languages, include_blank: true %>
+      <!--= f.input :level, collection: [ "Beginner", "Intermediate", "Advanced"]
+      -->
+      <%= f.input :level, collection: Course.levels, include_blank: true %>
+      <%= f.input :price %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>
