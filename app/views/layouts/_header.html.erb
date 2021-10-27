@@ -30,6 +30,12 @@
             Users
           <% end %>
         </li>
+        <li class="<%= 'active font-weight-bold' if current_page?(activity_path) %> nav-item">
+          <%= link_to activity_path, class: 'nav-link' do %>
+            <div class="fa fa-user"></div>
+            Activity
+          <% end %>
+        </li>
       </ul>
 
       <ul class="navbar-nav mr-right ms-auto">
