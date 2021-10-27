@@ -1,26 +1,35 @@
-<div class="jumbotron bg-light">
-    <div class="display-4">
-      What do you want to learn today?
-    </div>
-    <div class="p-4"></div>
-  <%= link_to root_path do %>
-
-    <div class="form-inline my-2 my-lg-0">
-      <%= form_tag(courses_path, method: :get) do %>
-        <div class="input-group">
-          <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm' %>
-          <span class="input-group-append">
-            <button class="btn btn-primary btn-sm" type="submit">
-              <span aria-hidden="true" class="fa fa-search"></span>
-            </button>
-          </span>
-        </div>
-      <% end %>
-    </div>
+<div class="jumbotron">
+  <div class="display-4">
+    What do you want to learn today?
+  </div>
+  <div class="p-4"></div>
+  <% if current_user %>
+    <%= search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f| %>
+      <div class="input-group">
+        <%= f.search_field :title_cont, class: 'form-control-sm', style: 'float: left; width: 150px; ', placeholder: 'Find a course', :autocomplete => :off %>
+        <span class="input-group-append">
+          <button class="btn btn-primary btn-sm" type="submit">
+            <span aria-hidden="true" class="fa fa-search"></span>
+          </button>
+        </span>
+      </div>
+    <% end %>
   <% end %>
+  <!--.form-inline.my-2.my-lg-0
+  -->
+  <!--  = form_tag(courses_path, method: :get) do
+  -->
+  <!--    .input-group
+  -->
+  <!--      = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm'
+  -->
+  <!--      %span.input-group-append
+  -->
+  <!--        %button.btn.btn-primary.btn-sm{:type => "submit"}
+  -->
+  <!--          %span.fa.fa-search{"aria-hidden" => "true"}
+  -->
 </div>
-<br>
-
 <div class="card-group">
   <div class="card card-body">
     <h1>
@@ -60,9 +69,6 @@
     Learn on your schedule
   </div>
 </div>
-
-
-
 <hr/>
 <h2>
   Popular courses
