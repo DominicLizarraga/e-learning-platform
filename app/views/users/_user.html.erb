@@ -1,13 +1,3 @@
-<h3>
-  <div class="text-center">
-    Users
-    <div class="badge badge-info">
-      <%= @users.count %>
-    </div>
-  </div>
-</h3>
-<p></p>
-
 
 <div class="card">
   <div class="card-header">
@@ -61,6 +51,8 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
+  <% if policy(user).edit? %>
+    <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
+  <% end %>
 
 </div>
