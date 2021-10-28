@@ -53,4 +53,13 @@
       <div class="badge badge-danger text-danger">No</div>
     <% end %>
   </div>
+  <div class="card-footer">
+  <% user.roles.each do |role| %>
+    <div class="badge badge-info text-success">
+      <%= role.name %>
+    </div>
+  <% end %>
+</div>
+
+
 </div>
