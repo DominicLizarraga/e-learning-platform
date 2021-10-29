@@ -1,7 +1,11 @@
-
 <div class="card">
   <div class="card-header">
     <div class="fa fa-user"></div>
+    <% if user.online? %>
+      <div class="text-success far fa-circle"></div>
+    <% else %>
+      <div class="text-danger far fa-circle"></div>
+    <% end %>
     <%= link_to user.email, user_path(user) %>
   </div>
   <div class="card-footer">
@@ -38,21 +42,19 @@
   <div class="card-footer">
     Confirmed email?
     <% if user.confirmed_at.present? %>
-      <div class="badge badge-success text-success">Yes</div>
+      <div class="badge badge-success text-primary">Yes</div>
     <% else %>
-      <div class="badge badge-danger text-danger">No</div>
+      <div class="badge badge-danger">No</div>
     <% end %>
   </div>
   <div class="card-footer">
-  <% user.roles.each do |role| %>
-    <div class="badge badge-info text-success">
-      <%= role.name %>
-    </div>
-  <% end %>
-</div>
-
-  <% if policy(user).edit? %>
-    <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
-  <% end %>
-
+    <% user.roles.each do |role| %>
+      <div class="badge badge-info text-primary">
+        <%= role.name %>
+      </div>
+    <% end %>
+    <% if policy(user).edit? %>
+      <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
+    <% end %>
+  </div>
 </div>
