@@ -7,9 +7,10 @@ class Course < ApplicationRecord
 
   has_rich_text :description
   belongs_to :user
+  has_many :lessons, dependent: :destroy
 
   extend FriendlyId
-  friendly_id:title,use: :slugged
+  friendly_id :title, use: :slugged
 
   LANGUAGES = [:"English", :"Russian", :"Polish", :"Spanish"]
   def self.languages
