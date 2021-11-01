@@ -5,10 +5,9 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <div class="form-inputs">
       <%= f.input :title %>
-      <%= f.input :description %>
-      <%= f.rich_text_area :description %>
 
-      <%= f.error :description, class: 'text-danger' %>
+      <%= f.label :description %>
+      <%= f.rich_text_area :description %>
 
       <%= f.input :short_description %>
       <!--= f.input :language, collection: [ "English", "Polish", "Russian"]

@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :course
-  validates :title, :context, :course, presence: true
+  validates :title, :content, :course, presence: true
+
+  has_rich_text :content
 
 
   extend FriendlyId
