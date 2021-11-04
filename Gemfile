@@ -22,7 +22,6 @@ gem 'public_activity'
 gem "rolify"
 gem "pundit"
 
-
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do

@@ -1,7 +1,17 @@
+<%= link_to 'Courses', courses_path %>
+\/
+<%= link_to @course.title, course_path(@course) %>
+\/
+new lesson
+<p></p>
+
+
 <div class="card">
-  <div class="card-header">
-    <h1>New lesson</h1>
-  </div>
+  <h3>
+    <div class="fa fa-graduation-cap"></div>
+    New lesson
+  </h3>
+
   <div class="card-body">
     <%= render 'form' %>
   </div>

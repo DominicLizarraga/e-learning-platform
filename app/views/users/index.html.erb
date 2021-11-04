@@ -6,13 +6,13 @@
     </div>
   </div>
 </h3>
-
-<div class="card-columns">
-  <% @users.each do |user| %>
-    <%= render 'users/user', user: user %>
-  <% end %>
-</div>
-<br>
+<p></p>
+<!--.card-columns
+-->
+<!--  - @users.each do |user|
+-->
+<!--    = render 'users/user', user: user
+-->
 <div class="form-inline">
   <%= search_form_for @q do |f| %>
     <%= f.search_field :email_cont, placeholder: 'email' %>
@@ -46,6 +46,8 @@
       <th>
         <%= 'last_sign_in_ip'.humanize %>
       </th>
+      <th>Confirmed?</th>
+      <th>Roles</th>
     </tr>
   </thead>
   <tbody>
@@ -74,6 +76,19 @@
         </td>
         <td>
           <%= user.last_sign_in_ip %>
+        </td>
+        <td>
+          <%= user.confirmed? %>
+        </td>
+        <td>
+          <% user.roles.each do |role| %>
+            <div class="badge badge-info">
+              <%= role.name %>
+            </div>
+          <% end %>
+          <% if policy(user).edit? %>
+            <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
