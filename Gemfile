@@ -21,6 +21,7 @@ gem 'ransack'
 gem 'public_activity'
 gem "rolify"
 gem "pundit"
+gem 'pagy'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
