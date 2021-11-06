@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
 
   has_many :courses
+  has_many :enrollemnts
+
+
   extend FriendlyId
   friendly_id :email, use: :slugged
 
