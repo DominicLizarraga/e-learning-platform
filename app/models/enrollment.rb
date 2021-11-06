@@ -7,6 +7,11 @@ class Enrollment < ApplicationRecord
   validates_uniqueness_of :course_id, scope: :course_id
 
   validate :cant_suscribe_to_own_course
+
+  def to_s
+    user.to_s + " " + course.to_s
+  end
+
   protected
 
   def cant_suscribe_to_own_course
@@ -18,4 +23,5 @@ class Enrollment < ApplicationRecord
       end
     end
   end
+
 end
