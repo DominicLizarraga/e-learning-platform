@@ -1,3 +1,10 @@
+<% content_for :title do %>
+  Corsego
+  |
+  All Users
+<% end %>
+
+
 <h3>
   <div class="text-center">
     Users
@@ -57,7 +64,7 @@
           <%= user.id %>
         </td>
         <td>
-          <%= user.email %>
+          <%= link_to user.email, user_path(user)  %>
         </td>
         <td>
           <%= user.created_at %>
