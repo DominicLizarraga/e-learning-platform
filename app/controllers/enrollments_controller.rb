@@ -1,9 +1,10 @@
-class EnrollmentsController < ApplicationController
+  class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: %i[ show edit update destroy ]
   before_action :set_course, only: [:new, :create]
 
   def index
     @enrollments = Enrollment.all
+    authorize @enrollments
   end
 
 
@@ -17,6 +18,7 @@ class EnrollmentsController < ApplicationController
 
 
   def edit
+    authorize @enrollment
   end
 
 
@@ -32,6 +34,7 @@ class EnrollmentsController < ApplicationController
 
 
   def update
+    authorize @enrollment
     respond_to do |format|
       if @enrollment.update(enrollment_params)
         format.html { redirect_to @enrollment, notice: "Enrollment was successfully updated." }
@@ -45,6 +48,7 @@ class EnrollmentsController < ApplicationController
 
 
   def destroy
+    authorize @enrollment
     @enrollment.destroy
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }
