@@ -8,6 +8,9 @@ class Enrollment < ApplicationRecord
 
   validate :cant_suscribe_to_own_course
 
+  extend FriendlyId
+  friendly_id :to_s, use: :slugged
+
   def to_s
     user.to_s + " " + course.to_s
   end
