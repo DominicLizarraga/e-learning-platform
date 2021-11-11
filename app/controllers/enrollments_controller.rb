@@ -3,7 +3,8 @@
   before_action :set_course, only: [:new, :create]
 
   def index
-    @enrollments = Enrollment.all
+    # @enrollments = Enrollment.all
+    @pagy, @enrollments = pagy(Enrollment.all)
     authorize @enrollments
   end
 

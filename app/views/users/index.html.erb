@@ -26,9 +26,8 @@
     <!--= f.search_field :email_or_sign_in_count_eq, placeholder: 'email or sign in count'
     -->
     <%= f.submit %>
+    <%= link_to 'refresh', users_path, class: "btn-sm" %>
   <% end %>
-  <div class="ml-2"></div>
-  <%= link_to 'refresh', users_path %>
 </div>
 <br/>
 <div class="table-responsive">
@@ -110,3 +109,5 @@
   </table>
 </div>
 <br/>
+  <%== pagy_bootstrap_nav(@pagy) %>
+
