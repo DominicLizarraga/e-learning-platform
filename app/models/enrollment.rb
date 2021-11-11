@@ -8,6 +8,9 @@ class Enrollment < ApplicationRecord
 
   validate :cant_suscribe_to_own_course
 
+  validates_presence_of :rating, if: :review?
+  validates_presence_of :review, if: :rating?
+
   extend FriendlyId
   friendly_id :to_s, use: :slugged
 
