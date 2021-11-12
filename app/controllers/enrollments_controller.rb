@@ -4,7 +4,8 @@
 
   def index
     # @enrollments = Enrollment.all
-    @pagy, @enrollments = pagy(Enrollment.all)
+    # @pagy, @enrollments = pagy(Enrollment.all)
+    @ransack_path = enrollments_path
     @q = Enrollment.ransack(params[:q])
     @pagy, @enrollments = pagy(@q.result.includes(:user))
 
@@ -25,6 +26,12 @@
     authorize @enrollment
   end
 
+  def my_students
+    @ransack_path = my_students_enrollments_path
+    @q = Enrollment.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:user))
+    render 'index'
+  end
 
   def create
     if @course.price > 0

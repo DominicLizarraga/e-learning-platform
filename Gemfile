@@ -22,6 +22,7 @@ gem 'public_activity'
 gem "rolify"
 gem "pundit"
 gem 'pagy'
+gem 'bootstrap', '~> 5.0.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
