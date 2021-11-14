@@ -75,14 +75,14 @@
               <%= link_to purchased_courses_path, class: "dropdown-item" do %>
                 <div class="fa fa-graduation-cap"></div>
                 Purchased Courses
-                <div class="badge bg-danger">
+                <div class="badge badge-danger">
                   <%= current_user.enrollments_count %>
                 </div>
               <% end %>
               <%= link_to pending_review_courses_path, class: "dropdown-item" do %>
                 <div class="fa fa-star"></div>
                 Pending Review
-                <div class="badge bg-danger">
+                <div class="badge badge-danger">
                   <%= current_user.enrollments.pending_review.count %>
                 </div>
               <% end %>
@@ -99,19 +99,19 @@
               <%= link_to new_course_path, class: "dropdown-item" do %>
                 <div class="fa fa-graduation-cap"></div>
                 <div class="fa fa-plus"></div>
-                New Course
+                Create Course
               <% end %>
               <%= link_to created_courses_path, class: "dropdown-item" do %>
                 <div class="fa fa-graduation-cap"></div>
-                My courses
-                <div class="badge bg-danger">
+                Created Courses
+                <div class="badge badge-danger">
                   <%= current_user.courses_count %>
                 </div>
               <% end %>
               <%= link_to my_students_enrollments_path, class: "dropdown-item" do %>
-                <div class="fa fa-users"></div>
+                <div class="fa fa-lock-open"></div>
                 My students
-                <div class="badge bg-danger">
+                <div class="badge badge-danger">
                   <%= Enrollment.joins(:course).where(courses: {user: current_user}).count %>
                 </div>
               <% end %>
@@ -128,14 +128,14 @@
               <%= link_to users_path, class: "dropdown-item" do %>
                 <div class="fa fa-users"></div>
                 Users
-                <div class="badge bg-danger">
+                <div class="badge badge-danger">
                   <%= User.count %>
                 </div>
               <% end %>
               <%= link_to enrollments_path, class: "dropdown-item" do %>
                 <div class="fa fa-lock-open"></div>
                 Enrollments
-                <div class="badge bg-danger">
+                <div class="badge badge-danger">
                   <%= Enrollment.count %>
                 </div>
               <% end %>

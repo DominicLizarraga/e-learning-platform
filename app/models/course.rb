@@ -9,6 +9,7 @@ class Course < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_many :lessons, dependent: :destroy
   has_many :enrollments
+  validates :title, uniqueness: true
   # User.find_each { |user| User.reset_counters(user.id, :courses) }
 
   extend FriendlyId

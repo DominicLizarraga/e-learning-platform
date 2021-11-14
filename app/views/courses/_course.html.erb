@@ -16,35 +16,18 @@
     </div>
   </div>
   <div class="card-footer">
-    <div class="text-warning fa fa-star"></div>
-    <b>
-      <%= course.average_rating %>
-    </b>
-  </div>
-  <div class="card-footer">
-    <div class="fa fa-tasks"></div>
-      Counter cache enrollments count:
-      <%= course.enrollments_count %>
-    </div>
-  <div class="card-footer">
     <div class="row">
       <div class="col-md-6">
-        <div class="fa fa-globe-africa"></div>
-        <%= course.language %>
-      </div>
-      <div class="col-md-6">
-        <div class="text-right">
-          <div class="fa fa-signal"></div>
-          <%= course.level %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="far fa-clock"></div>
-        <%= course.created_at.strftime('%d-%b-%Y') %>
+        <div class="text-warning fa fa-star"></div>
+        <b>
+          <%= course.average_rating %>
+        </b>
+        (
+        <div class="fa fa-user-graduate"></div>
+        <%= course.enrollments_count %>
+        )
+        <div class="fa fa-tasks"></div>
+        <%= course.lessons_count %>
       </div>
       <div class="col-md-6">
         <div class="text-right">
@@ -57,11 +40,7 @@
   <% if current_user %>
     <% if policy(course).edit? %>
       <div class="card-footer">
-        <!--- if policy(course).edit?
-        -->
         <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
-        <!--- if policy(course).destroy?
-        -->
         <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
       </div>
     <% end %>

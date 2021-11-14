@@ -1,20 +1,18 @@
 module CoursesHelper
-
   def enrollment_button(course)
     if current_user
-      #logic to purchase the course
       if course.user == current_user
         link_to "You created this course. View analytics", course_path(course)
       elsif course.enrollments.where(user: current_user).any?
-        link_to "You're already enrolled in this course, keep learning!", course_path(course)
+        link_to "You bought this course. Keep learning", course_path(course)
       elsif course.price > 0
-        link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success text-white'
+        link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success'
       else
-        link_to "Free Course", new_course_enrollment_path(course), class: 'btn btn-success text-white'
+        link_to "Free", new_course_enrollment_path(course), class: 'btn btn-success'
       end
+      #logic to buy
     else
-      # link to share the price
-      link_to "Check the price", new_course_enrollment_path(course), class: "btn btn-md btn-success text-white"
+      link_to "Check price", course_path(course), class: "btn btn-md btn-success"
     end
   end
 
@@ -23,11 +21,20 @@ module CoursesHelper
     if current_user
       if user_course.any?
         if user_course.pending_review.any?
-          link_to 'Add a review', edit_enrollment_path(user_course.first)
+          link_to edit_enrollment_path(user_course.first) do
+            "<i class='text-warning fa fa-star'></i>".html_safe + " " +
+            "<i class='text-dark fa fa-question'></i>".html_safe + " " +
+            'Add a review'
+          end
         else
-          link_to 'Thanks for reviewing! Your Review', enrollment_path(user_course.first)
+          link_to enrollment_path(user_course.first) do
+            "<i class='text-warning fa fa-star'></i>".html_safe + " " +
+            "<i class='fa fa-check'></i>".html_safe + " " +
+            'Thanks for reviewing! Your Review'
+          end
         end
       end
     end
   end
+
 end
