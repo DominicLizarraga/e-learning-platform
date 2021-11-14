@@ -1,8 +1,8 @@
 class Enrollment < ApplicationRecord
 
   belongs_to :course, counter_cache: true
-  belongs_to :user
-
+  belongs_to :user, counter_cache: true
+  # User.find_each { |user| User.reset_counters(user.id, :enrollments) }
   validates :user, :course, presence: true
   validates_uniqueness_of :user_id, scope: :user_id
   validates_uniqueness_of :course_id, scope: :course_id

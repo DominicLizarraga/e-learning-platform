@@ -6,10 +6,10 @@ class Course < ApplicationRecord
   end
 
   has_rich_text :description
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :lessons, dependent: :destroy
   has_many :enrollments
-
+  # User.find_each { |user| User.reset_counters(user.id, :courses) }
 
   extend FriendlyId
   friendly_id :title, use: :slugged

@@ -26,8 +26,9 @@
     <!--= f.search_field :email_or_sign_in_count_eq, placeholder: 'email or sign in count'
     -->
     <%= f.submit %>
-    <%= link_to 'refresh', users_path, class: "btn-sm" %>
   <% end %>
+  <div class="ml-2"></div>
+  <%= link_to 'refresh', users_path %>
 </div>
 <br/>
 <div class="table-responsive">
@@ -53,6 +54,12 @@
         </th>
         <th>
           <%= 'last_sign_in_ip'.humanize %>
+        </th>
+        <th>
+          <%= 'courses_count'.humanize %>
+        </th>
+        <th>
+          <%= 'enrollments_count'.humanize %>
         </th>
         <th>Confirmed?</th>
         <th>Roles</th>
@@ -91,11 +98,17 @@
             <%= user.last_sign_in_ip %>
           </td>
           <td>
+            <%= user.courses_count %>
+          </td>
+          <td>
+            <%= user.enrollments_count %>
+          </td>
+          <td>
             <%= user.confirmed? %>
           </td>
           <td>
             <% user.roles.each do |role| %>
-              <div class="badge badge-info text-primary">
+              <div class="badge badge-info text-black">
                 <%= role.name %>
               </div>
             <% end %>
@@ -108,6 +121,5 @@
     </tbody>
   </table>
 </div>
+<%= raw(pagy_bootstrap_nav(@pagy)) %>
 <br/>
-  <%== pagy_bootstrap_nav(@pagy) %>
-
