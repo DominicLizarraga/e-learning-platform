@@ -1,48 +1,50 @@
-<div class="card">
-  <div class="card-header">
-    <div class="fa fa-graduation-cap"></div>
-    <%= link_to course.title, course_path(course) %>
-  </div>
-  <div class="card-body">
-    <small>
-      <%= simple_format(course.short_description) %>
-    </small>
-  </div>
-  <div class="card-footer">
-    <div class="text-center">
-      <%= enrollment_button(course) %>
-      <div class="row"></div>
-      <%= review_button(course) %>
+<div class="card col-3">
+  <div class="">
+    <div class="card-header">
+      <div class="fa fa-graduation-cap"></div>
+      <%= link_to course.title, course_path(course) %>
     </div>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="text-warning fa fa-star"></div>
-        <b>
-          <%= course.average_rating %>
-        </b>
-        (
-        <div class="fa fa-user-graduate"></div>
-        <%= course.enrollments_count %>
-        )
-        <div class="fa fa-tasks"></div>
-        <%= course.lessons_count %>
+    <div class="card-body">
+      <small>
+        <%= simple_format(course.short_description) %>
+      </small>
+    </div>
+    <div class="card-footer">
+      <div class="text-center">
+        <%= enrollment_button(course) %>
+        <div class="row"></div>
+        <%= review_button(course) %>
       </div>
-      <div class="col-md-6">
-        <div class="text-right">
-          <div class="fa fa-chalkboard-teacher"></div>
-          <%= link_to course.user.username, user_path(course.user) %>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="text-warning fa fa-star"></div>
+          <b>
+            <%= course.average_rating %>
+          </b>
+          (
+          <div class="fa fa-user-graduate"></div>
+          <%= course.enrollments_count %>
+          )
+          <div class="fa fa-tasks"></div>
+          <%= course.lessons_count %>
+        </div>
+        <div class="col-md-6">
+          <div class="text-right">
+            <div class="fa fa-chalkboard-teacher"></div>
+            <%= link_to course.user.username, user_path(course.user) %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <% if current_user %>
-    <% if policy(course).edit? %>
-      <div class="card-footer">
-        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
-      </div>
+    <% if current_user %>
+      <% if policy(course).edit? %>
+        <div class="card-footer">
+          <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
+          <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

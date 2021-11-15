@@ -20,20 +20,7 @@
       </div>
     <% end %>
   <% end %>
-  <!--.form-inline.my-2.my-lg-0
-  -->
-  <!--  = form_tag(courses_path, method: :get) do
-  -->
-  <!--    .input-group
-  -->
-  <!--      = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Find a course", class: 'form-control-sm'
-  -->
-  <!--      %span.input-group-append
-  -->
-  <!--        %button.btn.btn-primary.btn-sm{:type => "submit"}
-  -->
-  <!--          %span.fa.fa-search{"aria-hidden" => "true"}
-  -->
+
 </div>
 <div class="card-group">
   <div class="card card-body">
@@ -74,12 +61,14 @@
     Learn on your schedule
   </div>
 </div>
+
 <p></p>
+
 <h2>
   <div class="fa fa-user-graduate"></div>
   Continue Learning
 </h2>
-<div class="card-columns">
+<div class="card-columns d-flex justify-content-around">
   <% @purchased_courses.each do |course| %>
     <%= render 'courses/course', course: course %>
   <% end %>
@@ -89,17 +78,17 @@
   <div class="fa fa-chart-line"></div>
   Popular courses
 </h2>
-<div class="card-columns">
-  <% @popular_courses.each do |course| %>
-    <%= render 'courses/course', course: course %>
-  <% end %>
-</div>
+  <div class="card-columns d-flex justify-content-around">
+    <% @popular_courses.each do |course| %>
+      <%= render 'courses/course', course: course %>
+    <% end %>
+  </div>
 <hr/>
 <h2>
   <div class="fa fa-star"></div>
   Top rated courses
 </h2>
-<div class="card-columns">
+<div class="card-columns d-flex justify-content-around">
   <% @top_rated_courses.each do |course| %>
     <%= render 'courses/course', course: course %>
   <% end %>
@@ -109,7 +98,7 @@
   <div class="fa fa-clock"></div>
   Latest courses
 </h2>
-<div class="card-columns">
+<div class="card-columns d-flex justify-content-around">
   <% @latest_couses.each do |course| %>
     <%= render 'courses/course', course: course %>
   <% end %>
