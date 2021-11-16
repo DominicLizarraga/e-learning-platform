@@ -79,7 +79,7 @@
   Popular courses
 </h2>
   <div class="card-columns d-flex justify-content-around">
-    <% @popular_courses.each do |course| %>
+    <% @popular.each do |course| %>
       <%= render 'courses/course', course: course %>
     <% end %>
   </div>
@@ -89,7 +89,7 @@
   Top rated courses
 </h2>
 <div class="card-columns d-flex justify-content-around">
-  <% @top_rated_courses.each do |course| %>
+  <% @top_rated.each do |course| %>
     <%= render 'courses/course', course: course %>
   <% end %>
 </div>
@@ -99,7 +99,7 @@
   Latest courses
 </h2>
 <div class="card-columns d-flex justify-content-around">
-  <% @latest_couses.each do |course| %>
+  <% @latest.each do |course| %>
     <%= render 'courses/course', course: course %>
   <% end %>
 </div>
