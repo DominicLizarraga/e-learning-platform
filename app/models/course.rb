@@ -10,7 +10,7 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :enrollments
   validates :title, uniqueness: true
-
+  has_many :user_lessons, through: :lessons
   # User.find_each { |user| User.reset_counters(user.id, :courses) }
 
   scope :latest, -> { limit(3).order(created_at: :desc) }
@@ -38,6 +38,12 @@ class Course < ApplicationRecord
       update_column :average_rating, (0)
     end
 
+  end
+
+  def progress(user)
+    unless self.lessons_count == 0
+      user_lessons.where(user: user).count/self.lessons_count.to_f*100
+    end
   end
 
 
