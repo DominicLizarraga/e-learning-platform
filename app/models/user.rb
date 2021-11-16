@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :courses, counter_cache: true
   has_many :enrollments, counter_cache: true
+  has_many :user_lessons
+
 
 
   extend FriendlyId
@@ -21,10 +23,17 @@ class User < ApplicationRecord
     self.email.split(/@/).first
   end
 
+  def view_lesson(lesson)
+    self.user_lessons.create(lesson: lesson)
+  end
+
+
   after_create :assign_default_role
 
   def assign_default_role
-    self.add_role(:student) if self.roles.blank?
+    unless self.user_lessons.where(lesson: lesson).any?
+      self.add_role(:student) if self.roles.blank?
+    end
   end
 
   def assign_default_role

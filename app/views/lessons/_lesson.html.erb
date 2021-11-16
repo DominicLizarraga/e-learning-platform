@@ -1,6 +1,16 @@
 <div class="card">
   <div class="card-header">
-    <div class="far fa-check-square"></div>
+    <% if lesson.viewed(current_user) == true %>
+      <div class="text-success far fa-check-square"></div>
+      <!--VIEWED
+      -->
+    <% else %>
+      <div class="text-danger far fa-check-square"></div>
+      <!--NOT VIEWED
+      -->
+    <% end %>
+    <!--.far.fa-check-square
+    -->
     <%= link_to lesson.title, course_lesson_path(@course, lesson) %>
   </div>
   <% if policy(lesson).show? %>
@@ -16,4 +26,3 @@
   <% end %>
 </div>
 <p></p>
-

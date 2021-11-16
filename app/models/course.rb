@@ -10,6 +10,7 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :enrollments
   validates :title, uniqueness: true
+
   # User.find_each { |user| User.reset_counters(user.id, :courses) }
 
   scope :latest, -> { limit(3).order(created_at: :desc) }

@@ -3,6 +3,7 @@ class Lesson < ApplicationRecord
   validates :title, :content, :course, presence: true
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) }
   has_rich_text :content
+  has_many :user_lessons
 
 
   extend FriendlyId
@@ -14,5 +15,10 @@ class Lesson < ApplicationRecord
   def to_s
     title
   end
+
+  def viewed(user)
+    self.user_lessons.where(user: user).present?
+  end
+
 
 end
