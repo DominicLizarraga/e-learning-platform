@@ -30,7 +30,7 @@
       <tr>
         <th>ID</th>
         <th>
-          <%= sort_link(@q, :user_email) %>
+          <%= sort_link(@q, :user_email, "User") %>
           <!--.fa.fa-user
           -->
           <!--User
@@ -46,7 +46,7 @@
           -->
         </th>
         <th>
-          <%= sort_link(@q, :course_title) %>
+          <%= sort_link(@q, :course_title, "Course") %>
           <!--.fa.fa-graduation-cap
           -->
           <!--Course
@@ -73,6 +73,7 @@
           <div class="text-warning fa fa-comment"></div>
           Review
         </th>
+        <th>Progress</th>
         <th></th>
         <th></th>
         <th></th>
@@ -108,13 +109,20 @@
             <%= enrollment.review %>
           </td>
           <td>
+            <%= number_to_percentage(enrollment.course.progress(enrollment.user), precision: 0) %>
+          </td>
+          <td>
             <%= link_to 'See Review', enrollment %>
           </td>
           <td>
-            <%= link_to 'Add Review', edit_enrollment_path(enrollment) %>
+            <% if policy(enrollment).edit? %>
+              <%= link_to 'Add Review', edit_enrollment_path(enrollment) %>
+            <% end %>
           </td>
           <td>
-            <%= link_to 'Delete Enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% if policy(enrollment).destroy? %>
+              <%= link_to 'Delete Enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
           </td>
         </tr>
       <% end %>
