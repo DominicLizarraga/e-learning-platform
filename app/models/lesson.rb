@@ -3,7 +3,7 @@ class Lesson < ApplicationRecord
   validates :title, :content, :course, presence: true
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) }
   has_rich_text :content
-  has_many :user_lessons
+  has_many :user_lessons, dependent: :destroy
 
 
   extend FriendlyId

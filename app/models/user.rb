@@ -6,10 +6,9 @@ class User < ApplicationRecord
   rolify
 
 
-  has_many :courses, counter_cache: true
-  has_many :enrollments, counter_cache: true
-  has_many :user_lessons
-
+  has_many :courses, dependent: :nullify
+  has_many :enrollments, dependent: :nullify
+  has_many :user_lessons, dependent: :nullify
 
 
   extend FriendlyId
