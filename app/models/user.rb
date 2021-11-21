@@ -3,16 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
-  rolify
 
+  rolify
 
   has_many :courses, dependent: :nullify
   has_many :enrollments, dependent: :nullify
   has_many :user_lessons, dependent: :nullify
-
-
-  extend FriendlyId
-  friendly_id :email, use: :slugged
 
   def to_s
     email
@@ -22,18 +18,17 @@ class User < ApplicationRecord
     self.email.split(/@/).first
   end
 
-  def view_lesson(lesson)
-    self.user_lessons.create(lesson: lesson)
-  end
-
-
-  after_create :assign_default_role
-
-  def assign_default_role
-    unless self.user_lessons.where(lesson: lesson).any?
-      self.add_role(:student) if self.roles.blank?
+  extend FriendlyId
+  friendly_id :email_or_id, use: :slugged
+  def email_or_id
+    if self.email.present?
+      self.email
+    else
+      self.id
     end
   end
+
+  after_create :assign_default_role
 
   def assign_default_role
     if User.count == 1
@@ -56,13 +51,19 @@ class User < ApplicationRecord
     self.enrollments.create(course: course, price: course.price)
   end
 
-  private
+  def view_lesson(lesson)
+    user_lesson = self.user_lessons.where(lesson: lesson)
+    if user_lesson.any?
+      user_lesson.first.increment!(:impressions)
+    else
+      self.user_lessons.create(lesson: lesson)
+    end
+  end
 
+  private
   def must_have_a_role
     unless roles.any?
       errors.add(:roles, "must have at least one role")
     end
   end
-
-
 end
