@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[landing_page privacy_policy]
-  def landing_page
+
+  skip_before_action :authenticate_user!, :only => [:index]
+  def index
     @latest_good_reviews = Enrollment.reviewed.latest_good_reviews
     @latest = Course.latest
     @top_rated = Course.top_rated
@@ -8,9 +9,22 @@ class StaticPagesController < ApplicationController
     @purchased_courses = Course.joins(:enrollments).where(enrollments: {user: current_user}).order(created_at: :desc).limit(3)
   end
 
-  def privacy_policy
-  end
   def activity
-    @activities = PublicActivity::Activity.all
+    if current_user.has_role?(:admin)
+      @activities = PublicActivity::Activity.all
+    else
+      redirect_to root_path, alert: "You are not authorized to access this page"
+    end
   end
+
+  def analytics
+    if current_user.has_role?(:admin)
+      @users = User.all
+      @enrollments = Enrollment.all
+      @courses = Course.all
+    else
+      redirect_to root_path, alert: "You are not authorized to access this page"
+    end
+  end
+
 end

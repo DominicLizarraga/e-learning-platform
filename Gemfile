@@ -23,6 +23,9 @@ gem "rolify"
 gem "pundit"
 gem 'pagy'
 gem 'bootstrap', '~> 5.0.2'
+gem 'chartkick'
+gem 'groupdate'
+
 
 gem 'bootsnap', '>= 1.4.4', require: false
 

@@ -1,4 +1,4 @@
-<div class="card col-3 m-3">
+<div class="card">
   <div class="card-header">
     <div class="fa fa-graduation-cap"></div>
     <%= link_to course.title, course_path(course) %>
@@ -80,17 +80,40 @@
   <!--        = link_to course.user.username, user_path(course.user)
   -->
   <% if current_user %>
-    <% if policy(course).edit? %>
+    <% if policy(course).destroy? %>
       <div class="card-footer">
         <% if policy(course).owner? %>
           <%= link_to 'Add lesson', new_course_lesson_path(course, @lesson), class: 'btn btn-primary btn-sm' %>
         <% end %>
-        <!--- if policy(course).edit?
-        -->
-        <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
-        <!--- if policy(course).destroy?
-        -->
-        <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+        <% if policy(course).edit? %>
+          <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
+        <% end %>
+        <% if policy(course).destroy? %>
+          <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if policy(course).destroy? %>
+      <div class="card-footer">
+        <% if course.published? %>
+          <div class="badge badge-success">published</div>
+        <% else %>
+          <div class="badge badge-danger">unpublished</div>
+        <% end %>
+        <% if course.approved? %>
+          <div class="badge badge-success">approved</div>
+        <% else %>
+          <div class="badge badge-danger">unapproved</div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if policy(course).approve? %>
+      <div class="card-footer">
+        <% if course.approved? %>
+          <%= link_to 'unapprove', unapprove_course_path(course), method: :patch, class: 'btn btn-sm btn-danger' %>
+        <% else %>
+          <%= link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-sm btn-success' %>
+        <% end %>
       </div>
     <% end %>
   <% end %>

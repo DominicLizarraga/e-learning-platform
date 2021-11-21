@@ -143,6 +143,10 @@
                 <div class="fa fa-bell"></div>
                 Activity
               <% end %>
+              <%= link_to analytics_path, class: "dropdown-item" do %>
+                <div class="fa fa-chart-line"></div>
+                Analytics
+              <% end %>
             </div>
           </li>
         <% end %>
@@ -172,6 +176,7 @@
         -->
         <li class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+            <div class="fa fa-user"></div>
             <b>
               <%= current_user.username %>
             </b>
