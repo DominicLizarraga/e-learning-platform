@@ -17,6 +17,8 @@
       -->
       <%= f.input :level, collection: Course.levels, include_blank: true %>
       <%= f.input :price %>
+      <%= f.input :published %>
+
     </div>
     <div class="form-actions mt-2">
       <%= f.button :submit %>
